@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="1702989600713-1" author="admin (generated)">
+        <preConditions onFailMessage="общага есть таблица">
+            <not>
+                <tableExists tableName="dormitory"/>
+            </not>
+        </preConditions>
+        <createTable tableName="dormitory">
+            <column autoIncrement="true" name="id_dormitory" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_dormitory"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="available_places" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="all_places" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dormitory_rooms_type" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="DOUBLE"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="fk_id_university" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1702989600713-2" author="admin (generated)">
+        <preConditions onFailMessage="универ есть таблица">
+            <not>
+                <tableExists tableName="university"/>
+            </not>
+        </preConditions>
+        <createTable tableName="university">
+            <column autoIncrement="true" name="id_university" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_university"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="website" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="government_funding" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="military_center" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1702989600713-3" author="admin (generated)">
+        <addUniqueConstraint columnNames="address" constraintName="uc_university_address" tableName="university"/>
+    </changeSet>
+    <changeSet id="1702989600713-4" author="admin (generated)">
+        <addUniqueConstraint columnNames="email" constraintName="uc_university_email" tableName="university"/>
+    </changeSet>
+    <changeSet id="1702989600713-5" author="admin (generated)">
+        <addUniqueConstraint columnNames="name" constraintName="uc_university_name" tableName="university"/>
+    </changeSet>
+    <changeSet id="1702989600713-6" author="admin (generated)">
+        <addUniqueConstraint columnNames="phone_number" constraintName="uc_university_phone_number"
+                             tableName="university"/>
+    </changeSet>
+    <changeSet id="1702989600713-7" author="admin (generated)">
+        <addUniqueConstraint columnNames="website" constraintName="uc_university_website" tableName="university"/>
+    </changeSet>
+    <changeSet id="1702989600713-8" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_university" baseTableName="dormitory"
+                                 constraintName="FK_DORMITORY_ON_FK_ID_UNIVERSITY" onDelete="CASCADE"
+                                 referencedColumnNames="id_university" referencedTableName="university"/>
+    </changeSet>
+</databaseChangeLog>
