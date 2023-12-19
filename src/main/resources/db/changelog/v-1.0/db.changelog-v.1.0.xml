@@ -6,12 +6,60 @@
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
-    <changeSet id="1702989600713-1" author="admin (generated)">
-        <preConditions onFailMessage="общага есть таблица">
-            <not>
-                <tableExists tableName="dormitory"/>
-            </not>
-        </preConditions>
+    <changeSet id="1703010730219-1" author="admin (generated)">
+        <createTable tableName="culture_house">
+            <column autoIncrement="true" name="id_culture_house" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_culture_house"/>
+            </column>
+            <column name="address" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="DOUBLE"/>
+            <column name="schedule" type="VARCHAR(255)"/>
+            <column name="fk_id_university" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-2" author="admin (generated)">
+        <createTable tableName="culture_house_activity">
+            <column autoIncrement="true" name="id_culture_house_activity" type="SMALLINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_culture_house_activity"/>
+            </column>
+            <column name="name_activity" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="fk_id_culture_house" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-3" author="admin (generated)">
+        <createTable tableName="department">
+            <column autoIncrement="true" name="id_department" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_department"/>
+            </column>
+            <column name="name_department" type="VARCHAR(255)"/>
+            <column name="fk_id_faculty" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-4" author="admin (generated)">
+        <createTable tableName="dining_room">
+            <column autoIncrement="true" name="id_dining_room" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_dining_room"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="rating" type="DOUBLE"/>
+            <column name="schedule" type="VARCHAR(255)"/>
+            <column name="fk_id_university" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-5" author="admin (generated)">
+        <createTable tableName="direction_subjects">
+            <column name="id_educational_direction" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subject" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-6" author="admin (generated)">
         <createTable tableName="dormitory">
             <column autoIncrement="true" name="id_dormitory" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_dormitory"/>
@@ -31,12 +79,126 @@
             <column name="fk_id_university" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1702989600713-2" author="admin (generated)">
-        <preConditions onFailMessage="универ есть таблица">
-            <not>
-                <tableExists tableName="university"/>
-            </not>
-        </preConditions>
+    <changeSet id="1703010730219-7" author="admin (generated)">
+        <createTable tableName="educational_direction">
+            <column autoIncrement="true" name="id_educational_direction" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_educational_direction"/>
+            </column>
+            <column name="count_places" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="educational_type" type="SMALLINT"/>
+            <column name="educational_cost" type="BIGINT"/>
+            <column name="name_educational_direction" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fk_id_department" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-8" author="admin (generated)">
+        <createTable tableName="faculty">
+            <column autoIncrement="true" name="id_faculty" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_faculty"/>
+            </column>
+            <column name="name_faculty" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="fk_id_university" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-9" author="admin (generated)">
+        <createTable tableName="gym">
+            <column autoIncrement="true" name="id_gym" type="SMALLINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_gym"/>
+            </column>
+            <column name="address" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="schedule" type="VARCHAR(255)"/>
+            <column name="fk_id_university" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-10" author="admin (generated)">
+        <createTable tableName="gym_activity">
+            <column autoIncrement="true" name="id_gym_activity" type="SMALLINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_gym_activity"/>
+            </column>
+            <column name="name_activity" type="VARCHAR(255)"/>
+            <column name="gym_activity_trainer" type="VARCHAR(255)"/>
+            <column name="fk_id_gym" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-11" author="admin (generated)">
+        <createTable tableName="laboratory">
+            <column autoIncrement="true" name="id_laboratory" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_laboratory"/>
+            </column>
+            <column name="laboratory_count_places" type="SMALLINT"/>
+            <column name="laboratory_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fk_id_department" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-12" author="admin (generated)">
+        <createTable tableName="laboratory_assistant">
+            <column autoIncrement="true" name="id_laboratory_assistant" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_laboratory_assistant"/>
+            </column>
+            <column name="hours_in_laboratory_per_week" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="position" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="experience_years" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fk_id_laboratory" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-13" author="admin (generated)">
+        <createTable tableName="person">
+            <column autoIncrement="true" name="id_person" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_person"/>
+            </column>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-14" author="admin (generated)">
+        <createTable tableName="student">
+            <column autoIncrement="true" name="id_student" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_student"/>
+            </column>
+            <column name="fk_id_study_group" type="BIGINT"/>
+            <column name="free_education_cost" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="student_passing_score" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-15" author="admin (generated)">
+        <createTable tableName="study_group">
+            <column autoIncrement="true" name="id_study_group" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_study_group"/>
+            </column>
+            <column name="fk_id_educational_direction" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703010730219-16" author="admin (generated)">
         <createTable tableName="university">
             <column autoIncrement="true" name="id_university" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_university"/>
@@ -68,25 +230,99 @@
             <column name="description" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1702989600713-3" author="admin (generated)">
+    <changeSet id="1703010730219-17" author="admin (generated)">
+        <addUniqueConstraint columnNames="fk_id_university" constraintName="uc_culture_house_fk_id_university"
+                             tableName="culture_house"/>
+    </changeSet>
+    <changeSet id="1703010730219-18" author="admin (generated)">
+        <addUniqueConstraint columnNames="username" constraintName="uc_person_username" tableName="person"/>
+    </changeSet>
+    <changeSet id="1703010730219-19" author="admin (generated)">
         <addUniqueConstraint columnNames="address" constraintName="uc_university_address" tableName="university"/>
     </changeSet>
-    <changeSet id="1702989600713-4" author="admin (generated)">
+    <changeSet id="1703010730219-20" author="admin (generated)">
         <addUniqueConstraint columnNames="email" constraintName="uc_university_email" tableName="university"/>
     </changeSet>
-    <changeSet id="1702989600713-5" author="admin (generated)">
+    <changeSet id="1703010730219-21" author="admin (generated)">
         <addUniqueConstraint columnNames="name" constraintName="uc_university_name" tableName="university"/>
     </changeSet>
-    <changeSet id="1702989600713-6" author="admin (generated)">
+    <changeSet id="1703010730219-22" author="admin (generated)">
         <addUniqueConstraint columnNames="phone_number" constraintName="uc_university_phone_number"
                              tableName="university"/>
     </changeSet>
-    <changeSet id="1702989600713-7" author="admin (generated)">
+    <changeSet id="1703010730219-23" author="admin (generated)">
         <addUniqueConstraint columnNames="website" constraintName="uc_university_website" tableName="university"/>
     </changeSet>
-    <changeSet id="1702989600713-8" author="admin (generated)">
+    <changeSet id="1703010730219-24" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_culture_house" baseTableName="culture_house_activity"
+                                 constraintName="FK_CULTURE_HOUSE_ACTIVITY_ON_FK_ID_CULTURE_HOUSE" onDelete="CASCADE"
+                                 referencedColumnNames="id_culture_house" referencedTableName="culture_house"/>
+    </changeSet>
+    <changeSet id="1703010730219-25" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_university" baseTableName="culture_house"
+                                 constraintName="FK_CULTURE_HOUSE_ON_FK_ID_UNIVERSITY"
+                                 referencedColumnNames="id_university" referencedTableName="university"/>
+    </changeSet>
+    <changeSet id="1703010730219-26" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_faculty" baseTableName="department"
+                                 constraintName="FK_DEPARTMENT_ON_FK_ID_FACULTY" referencedColumnNames="id_faculty"
+                                 referencedTableName="faculty"/>
+    </changeSet>
+    <changeSet id="1703010730219-27" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_university" baseTableName="dining_room"
+                                 constraintName="FK_DINING_ROOM_ON_FK_ID_UNIVERSITY" onDelete="CASCADE"
+                                 referencedColumnNames="id_university" referencedTableName="university"/>
+    </changeSet>
+    <changeSet id="1703010730219-28" author="admin (generated)">
         <addForeignKeyConstraint baseColumnNames="fk_id_university" baseTableName="dormitory"
                                  constraintName="FK_DORMITORY_ON_FK_ID_UNIVERSITY" onDelete="CASCADE"
                                  referencedColumnNames="id_university" referencedTableName="university"/>
+    </changeSet>
+    <changeSet id="1703010730219-29" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_department" baseTableName="educational_direction"
+                                 constraintName="FK_EDUCATIONAL_DIRECTION_ON_FK_ID_DEPARTMENT"
+                                 referencedColumnNames="id_department" referencedTableName="department"/>
+    </changeSet>
+    <changeSet id="1703010730219-30" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_university" baseTableName="faculty"
+                                 constraintName="FK_FACULTY_ON_FK_ID_UNIVERSITY" onDelete="CASCADE"
+                                 referencedColumnNames="id_university" referencedTableName="university"/>
+    </changeSet>
+    <changeSet id="1703010730219-31" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_gym" baseTableName="gym_activity"
+                                 constraintName="FK_GYM_ACTIVITY_ON_FK_ID_GYM" onDelete="CASCADE"
+                                 referencedColumnNames="id_gym" referencedTableName="gym"/>
+    </changeSet>
+    <changeSet id="1703010730219-32" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_university" baseTableName="gym"
+                                 constraintName="FK_GYM_ON_FK_ID_UNIVERSITY" onDelete="CASCADE"
+                                 referencedColumnNames="id_university" referencedTableName="university"/>
+    </changeSet>
+    <changeSet id="1703010730219-33" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_laboratory" baseTableName="laboratory_assistant"
+                                 constraintName="FK_LABORATORY_ASSISTANT_ON_FK_ID_LABORATORY"
+                                 referencedColumnNames="id_laboratory" referencedTableName="laboratory"/>
+    </changeSet>
+    <changeSet id="1703010730219-34" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_department" baseTableName="laboratory"
+                                 constraintName="FK_LABORATORY_ON_FK_ID_DEPARTMENT"
+                                 referencedColumnNames="id_department" referencedTableName="department"/>
+    </changeSet>
+    <changeSet id="1703010730219-35" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_study_group" baseTableName="student"
+                                 constraintName="FK_STUDENT_ON_FK_ID_STUDY_GROUP" referencedColumnNames="id_study_group"
+                                 referencedTableName="study_group"/>
+    </changeSet>
+    <changeSet id="1703010730219-36" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="fk_id_educational_direction" baseTableName="study_group"
+                                 constraintName="FK_STUDY_GROUP_ON_FK_ID_EDUCATIONAL_DIRECTION"
+                                 referencedColumnNames="id_educational_direction"
+                                 referencedTableName="educational_direction"/>
+    </changeSet>
+    <changeSet id="1703010730219-37" author="admin (generated)">
+        <addForeignKeyConstraint baseColumnNames="id_educational_direction" baseTableName="direction_subjects"
+                                 constraintName="fk_direction_subjects_on_educational_direction"
+                                 referencedColumnNames="id_educational_direction"
+                                 referencedTableName="educational_direction"/>
     </changeSet>
 </databaseChangeLog>

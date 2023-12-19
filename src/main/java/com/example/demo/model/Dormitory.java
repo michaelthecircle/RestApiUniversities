@@ -2,8 +2,10 @@ package com.example.demo.model;
 
 import com.example.demo.model.University;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -32,12 +34,12 @@ public class Dormitory {
 
     @Column(name = "available_places")
     @NotNull
-    @Size
+    @Digits(integer=32767, fraction = 0)
     private short availablePlaces;
 
     @Column(name = "all_places")
     @NotNull
-    @Size
+    @Digits(integer=32767, fraction = 0)
     private short allPlaces;
 
     @Enumerated(EnumType.ORDINAL)
@@ -54,9 +56,10 @@ public class Dormitory {
     @ManyToOne
     @JoinColumn(name = "fk_id_university", referencedColumnName = "id_university")
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private University universityOwner;
 
-    @JsonCreator
+ //   @JsonCreator
     public Dormitory(String address, short availablePlaces, short allPlaces, DormitoryRoomsType dormitoryRoomsType, double rating, String description, University universityOwner) {
         this.address = address;
         this.availablePlaces = availablePlaces;
