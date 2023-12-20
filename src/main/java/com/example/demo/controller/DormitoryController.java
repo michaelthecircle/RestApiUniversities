@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@CrossOrigin(origins = "http://localhost/8081")
+//@CrossOrigin(origins = "http://localhost/808sfafasd1")
 @RestController
 @RequestMapping(value = "/dormitory")
 public class DormitoryController {

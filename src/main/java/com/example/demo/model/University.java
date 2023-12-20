@@ -74,6 +74,17 @@ public class University {
     @OneToMany(mappedBy = "universityOwner", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Dormitory> dormitories;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "universityOwner", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<DiningRoom> diningRooms;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "universityOwner", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Gym> gyms;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "universityOwner", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Faculty> faculties;
 
     public University(String name,
                       String address,

@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Dormitory;
+import com.example.demo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.model.University;
 import com.example.demo.services.UniversityService;
 
 import java.util.ArrayList;
@@ -63,6 +62,27 @@ public class UniversityController {
     public ResponseEntity<String> updateUniversity(@RequestBody University university) {
         University updatedUniversity = universityService.updateUniversity(university);
         return ResponseEntity.ok("University with ID: " + updatedUniversity.getIdUniversity() + " has been updated");
+    }
+
+    @GetMapping("/findDormitories/{id}")
+    ResponseEntity<List<Dormitory>> findDormitories(@PathVariable("id") long id) {
+        List<Dormitory> dormitoryList = new ArrayList<>(universityService.getUniversityById(id).getDormitories());
+        return ResponseEntity.ok(dormitoryList);
+    }
+    @GetMapping("/findDiningRooms/{id}")
+    ResponseEntity<List<DiningRoom>> findDiningRooms(@PathVariable("id") long id) {
+        List<DiningRoom> diningRooms = new ArrayList<>(universityService.getUniversityById(id).getDiningRooms());
+        return ResponseEntity.ok(diningRooms);
+    }
+    @GetMapping("/findGyms/{id}")
+    ResponseEntity<List<Gym>> findGyms(@PathVariable("id") long id) {
+        List<Gym> gyms = new ArrayList<>(universityService.getUniversityById(id).getGyms());
+        return ResponseEntity.ok(gyms);
+    }
+    @GetMapping("/findFaculties/{id}")
+    ResponseEntity<List<Faculty>> findFaculties(@PathVariable("id") long id) {
+        List<Faculty> faculties = new ArrayList<>(universityService.getUniversityById(id).getFaculties());
+        return ResponseEntity.ok(faculties);
     }
 }
 
